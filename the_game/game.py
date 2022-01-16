@@ -16,6 +16,7 @@ class Game:
     :param pc_player_value: determines, what is the value of ai's pawn
     :type pc_player_value: int
     """
+
     def __init__(self, player=None, board_size=5, AI=None):
         self.human_move_now = True
         if AI is None:
@@ -36,6 +37,13 @@ class Game:
 
     def create_board(self):
         self.board = Board(self.board_size)
+
+    def _reset_game(self):
+        '''
+        Resets the game => new board and human starts.
+        '''
+        self.create_board()
+        self.human_move_now = True
 
     def start(self):
         """
@@ -66,17 +74,19 @@ class Game:
 
             input_is_active = updated_input_is_active
 
-            self.create_board()
-
-            self.window.set_bg(self.board_size)
-
             # if finished setting up his game
             if play:
+                run = False
+                self.create_board()
+                self.window.set_bg(self.board_size)
                 if self.player.name == '':
                     self.player.name = 'Player 1'
                 return
 
     def play(self):
+        '''
+        Draws a main game => makes AI's moves or waits for player move.
+        '''
         run = True
         while run:
             self.draw_window()
@@ -108,7 +118,7 @@ class Game:
 
     def change_current_player(self):
         """
-        Cheks if someone has won, after his move, then changes current mover
+        Checks if someone has won, after his move, then changes current mover
         """
         self.check_if_someone_wins()
         self.human_move_now = not self.human_move_now
@@ -132,10 +142,19 @@ class Game:
         run = True
         while run:
             if self.human_move_now:
-                self.window.draw_end(self.player.name, self.board,
-                                     self._human_player_value,
-                                     self._pc_player_value)
+                winners_name = self.player.name
             else:
-                self.window.draw_end(self.AI.name, self.board,
-                                     self._human_player_value,
-                                     self._pc_player_value)
+                winners_name = self.AI.name
+            if_new_settings = self.window.draw_end(winners_name, self.board,
+                                                   self._human_player_value,
+                                                   self._pc_player_value)
+
+            if if_new_settings is True:
+                run = False
+                self._reset_game()
+                self.start()
+                self.play()
+            elif if_new_settings is False:
+                run = False
+                self._reset_game()
+                self.play()

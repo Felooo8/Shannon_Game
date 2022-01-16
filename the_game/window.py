@@ -55,6 +55,10 @@ PLAY_IMAGE = pygame.image.load(
     os.path.join('assets/play.png'))
 PLAY = pygame.transform.scale(PLAY_IMAGE, (image_radius, image_radius))
 
+SETTINGS_IMAGE = pygame.image.load(
+    os.path.join('assets/settings.png'))
+SETTINGS = pygame.transform.scale(SETTINGS_IMAGE, (image_radius, image_radius))
+
 WINDOW_SMALLER_THAN_WINDOW = 50
 INPUT_SIZE = WINDOW_SIZE - WINDOW_SMALLER_THAN_WINDOW, 70
 INPUT_IMAGE = pygame.image.load(
@@ -263,13 +267,14 @@ class Window:
 
         self.draw_main_window(board, human_player_value, pc_value)
 
-        middle_y = self.bg_height() / 2
-        middle_x = self.bg_width() / 2
+        middle_y = self._bg_height() / 2
+        middle_x = self._bg_width() / 2
 
         text_ending = FONT_BIG.render(f'{winner_name} won!', True, BLACK)
         draw_ending = text_ending.get_rect()
 
-        if draw_ending.width > self.bg_width():
+        # if text is widther than screen split it
+        if draw_ending.width > self._bg_width():
             text_ending_name = FONT_BIG.render(f'{winner_name}', True, BLACK)
             draw_ending_name = text_ending_name.get_rect()
             text_ending_won = FONT_BIG.render('won!', True, BLACK)
@@ -283,11 +288,30 @@ class Window:
             draw_ending.center = middle_x, middle_y
             WIN.blit(text_ending, draw_ending)
 
+        margin_y = 20
+        margin_x = 20
+        settings_x = middle_x - margin_x - SETTINGS.get_width()
+        play_x = middle_x + margin_x
+        both_y = self._bg_height() - margin_y - PLAY.get_height()
+        settings = WIN.blit(
+            SETTINGS, (settings_x, both_y))
+        play = WIN.blit(
+            PLAY, (play_x, both_y))
+
+        if_new_settings = None
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit()
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+
+                pos = pygame.mouse.get_pos()
+                if settings.collidepoint(pos):
+                    if_new_settings = True
+                elif play.collidepoint(pos):
+                    if_new_settings = False
 
         pygame.display.update()
+        return if_new_settings
 
     def set_bg(self, board_size):
         """
@@ -304,10 +328,10 @@ class Window:
                 BG_IMAGE_5, (WINDOW_SIZE, WINDOW_SIZE))
         self.pawn_image_size(board_size)
 
-    def bg_width(self):
+    def _bg_width(self):
         return self._BG.get_width()
 
-    def bg_height(self):
+    def _bg_height(self):
         return self._BG.get_height()
 
     def pawn_coords(self, row, column):
@@ -327,7 +351,7 @@ class Window:
         """
         Sets a pawn image size based on the board size
         """
-        radius = self.bg_width() / board_size
+        radius = self._bg_width() / board_size
         size = radius - images_smaller_than_place
 
         self._pawns_image_size = size

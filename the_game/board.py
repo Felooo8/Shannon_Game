@@ -3,12 +3,13 @@ class Board:
     Class Board.
     Represents the whole board, which contains of pawns.
     Contains attributes:
-    :param _size: board's size
-    :type _size: int
+    :param size: board's size
+    :type size: int
 
-    :type board: array of pawns
+    :param board: array of pawns
     :type board: list of lists
     """
+
     def __init__(self, size=5) -> None:
         self._size = size
         self.array = self.create_board(self._size)
