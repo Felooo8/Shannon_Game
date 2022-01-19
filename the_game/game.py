@@ -60,7 +60,7 @@ class Game:
         run = True
         while run:
             # creates a window and gets players choices
-            play, name, board_size, ai_level, updated_input_is_active = (
+            play, name, board_size, ai_level, input_is_active = (
                 self.window.draw_start_window(
                     board_size, ai_level, name, input_is_active))
 
@@ -72,7 +72,7 @@ class Game:
                 AI = AIComputer()
             self.AI = AI
 
-            input_is_active = updated_input_is_active
+            input_is_active = input_is_active
 
             # if finished setting up his game
             if play:

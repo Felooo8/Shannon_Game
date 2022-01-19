@@ -78,13 +78,11 @@ def _crossroad(array, value, location, current_road, locs, previous_direction):
 
     directions = ['down', 'right', 'up', 'left']
 
-    # local_locations holds a value in this crossroad.
-    local_locations = locs[:]
     for i, direction in enumerate(directions):
         # checks if we are not moving back from where we came
         if not previous_direction == directions[i - 2]:
             road_new = _make_move(array, location, direction,
-                                  current_road, local_locations, value)
+                                  current_road, locs, value)
             # if we could reach the edge
             if road_new:
                 list_of_roads.append(road_new)

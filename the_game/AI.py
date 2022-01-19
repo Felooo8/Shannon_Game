@@ -57,20 +57,20 @@ class AIComputer(Computer):
         array = board.array
 
         # gets player's winning roads
-        best_ai_moves = self._winning_roads(array, 1)
+        ai_winning_moves = self._winning_roads(array, 1)
         # checks how many moves ai needs to win
-        best_ai = self._best_road_lenght(best_ai_moves)
+        ai_fastest_win = self._best_road_lenght(ai_winning_moves)
         # gets ai's winning roads
-        best_player_moves = self._winning_roads(array, 0)
+        player_winning_moves = self._winning_roads(array, 0)
         # checks how many moves player needs to win
-        best_player = self._best_road_lenght(best_player_moves)
+        player_fastest_win = self._best_road_lenght(player_winning_moves)
 
         # checks if player can win first
-        if best_player < best_ai:
-            fastest_moves = self._fastest_roads(best_player_moves)
+        if player_fastest_win < ai_fastest_win:
+            fastest_moves = self._fastest_roads(player_winning_moves)
             move = self._random_move(fastest_moves)
         else:
-            fastest_moves = self._fastest_roads(best_ai_moves)
+            fastest_moves = self._fastest_roads(ai_winning_moves)
             move = self._random_move(fastest_moves)
         move.set_value(1)
         return

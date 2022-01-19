@@ -239,14 +239,19 @@ class Window:
                     input_active = not input_active
                 elif text_rect_size_5.collidepoint(pos):
                     board_size = 5
+                    input_active = False
                 elif text_rect_size_7.collidepoint(pos):
                     board_size = 7
+                    input_active = False
                 elif text_rect_size_9.collidepoint(pos):
                     board_size = 9
+                    input_active = False
                 elif text_rect_ai_easy.collidepoint(pos):
                     ai_level = 0
+                    input_active = False
                 elif text_rect_ai_hard.collidepoint(pos):
                     ai_level = 1
+                    input_active = False
                 elif play.collidepoint(pos):
                     return True, name, board_size, ai_level, input_active
 
