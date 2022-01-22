@@ -2,15 +2,15 @@ class Board:
     """
     Class Board.
     Represents the whole board, which contains of pawns.
-    Contains attributes:
-    :param size: board's size
-    :type size: int
-
-    :param board: array of pawns
-    :type board: list of lists
     """
 
     def __init__(self, size=5) -> None:
+        """
+        Initializes board.
+        Contains attributes:
+            :param size: represents board's size
+            :param board: represents array of pawns
+        """
         self._size = size
         self.array = self.create_board(self._size)
 
@@ -43,15 +43,15 @@ class Pawn:
     """
     Class Pawn.
     Represents a single pawn on a board.
-    Contains attributes:
-    :param value: pawn's value
-    :type value: int
-
-    :param _rectangle: pawn's rectangle, as an image
-    :type _rectangle: pygame.Rect
     """
 
     def __init__(self, value) -> None:
+        """
+        Initializes pawn.
+        Contains attributes:
+            : param value: pawn's value
+            : param _rectangle: pawn's rectangle, as an image
+        """
         self.value = value
         self._rectangle = None
 

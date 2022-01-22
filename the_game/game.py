@@ -9,15 +9,21 @@ class Game:
     """
     Class Game.
     Runs a game.
-    Contains attributes:
-    :param human_player_value: determines, what is the value of human's pawn
-    :type human_player_value: int
-
-    :param pc_player_value: determines, what is the value of ai's pawn
-    :type pc_player_value: int
     """
 
+    HUMAN_PLAYER_PAWN_VALUE = 0
+    AI_PAWN_VALUE = 1
+
     def __init__(self, player=None, board_size=5, AI=None):
+        """
+        Initializes game.
+        Parameters:
+            :param human_move_now: determines, whose move i snow (if True => human player)
+            :param AI: represents AI
+            :param player: represents human player
+            :param human_player_value: determines, what is the value of human's pawn
+            :param pc_player_value: determines, what is the value of ai's pawn
+        """  # noqa
         self.human_move_now = True
         if AI is None:
             AI = Computer()
@@ -28,8 +34,8 @@ class Game:
 
         self.board_size = board_size
 
-        self._human_player_value = 0
-        self._pc_player_value = 1
+        self._human_player_value = self.HUMAN_PLAYER_PAWN_VALUE
+        self._pc_player_value = self.AI_PAWN_VALUE
 
         self.window = Window()
 
@@ -39,9 +45,9 @@ class Game:
         self.board = Board(self.board_size)
 
     def _reset_game(self):
-        '''
+        """
         Resets the game => new board and human starts.
-        '''
+        """
         self.create_board()
         self.human_move_now = True
 
@@ -84,9 +90,9 @@ class Game:
                 return
 
     def play(self):
-        '''
+        """
         Draws a main game => makes AI's moves or waits for player move.
-        '''
+        """
         run = True
         while run:
             self.draw_window()

@@ -9,18 +9,17 @@ class Computer:
     Represents an AI.`
     It makes random moves.\n
     Contains attributes:\n
-    :param name: AI's name\n
-    :type name: str
+        :param name: AI's name\n
     """
 
     def __init__(self):
         self.name = names.get_first_name()
 
     def play(self, board):
-        '''
+        """
         Function play.
         Makes AI's move => chooses random free place and puts pawn there.
-        '''
+        """
         possible_moves = self._get_possible_moves(board.array)
         if possible_moves:
             x = random.choice(possible_moves)
@@ -41,8 +40,7 @@ class AIComputer(Computer):
     Represents an advanced AI.
     It makes moves based on a simple algorythm.\n
     Contains attributes:
-    :param name: AI's name
-    :type name: str
+        :param name: AI's name
     """
 
     def __init__(self):
