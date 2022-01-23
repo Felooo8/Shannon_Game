@@ -26,6 +26,7 @@ The game requires assets folder to display window.
 
 # Playing the game
 - AI difficulty level and board size can be changed in the starting window by clicking on the appropriate button. (default easy and 5)
-- Player's name can be changed by clicking on the input field and simply writing a name with keyboard.
+- A player's name can be changed by clicking on the input field and simply writing a name with the keyboard.
 - The player makes their move simply by clicking on the empty field they want to put their pawn on.
-- After a finished game player can either play a rematch or start a new game using different settings.
+- After a finished game, player can either play a rematch or start a new game using different settings.
+
