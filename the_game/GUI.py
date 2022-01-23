@@ -165,7 +165,7 @@ class Window:
         middle = WIDTH / 2
 
         enter_name_y = 40
-        draw_text_name = FONT_SMALL.render('Enter you name:', True, BLACK)
+        draw_text_name = FONT_SMALL.render('Enter your name:', True, BLACK)
         text_rect_name = draw_text_name.get_rect()
         text_rect_name.center = (middle, enter_name_y)
         WIN.blit(draw_text_name, text_rect_name)
