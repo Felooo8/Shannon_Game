@@ -1,6 +1,6 @@
 from the_game.AI import AIComputer, Computer
 from the_game.board import Board
-from the_game.window import Window
+from the_game.GUI import Window
 from the_game.player import Player
 from the_game.algorythms import if_wins
 

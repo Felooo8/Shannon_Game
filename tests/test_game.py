@@ -1,7 +1,7 @@
 from the_game.game import Game
 from the_game.AI import Computer, AIComputer
 from the_game.player import Player
-from the_game.window import Window
+from the_game.GUI import Window
 from the_game.board import Board, Pawn
 import pytest
 

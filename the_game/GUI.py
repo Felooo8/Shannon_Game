@@ -29,7 +29,7 @@ BG_BLUR = pygame.transform.scale(BG_BLUR_IMAGE, (WINDOW_SIZE, WINDOW_SIZE))
 WIDTH, HEIGHT = BG.get_width(), BG.get_height()
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Gale by Felo")
+pygame.display.set_caption("Shannon Game by Felo")
 icon_size = (64, 64)
 programIcon = pygame.transform.scale(
     pygame.image.load(os.path.join('assets/icon.png')), icon_size)
