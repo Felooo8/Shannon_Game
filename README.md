@@ -1,4 +1,4 @@
-# Shannon Game
+# Shannon Game by Felo
 
 A [Shannon Game Gale](https://en.wikipedia.org/wiki/Shannon_switching_game#Gale) variant written in Python using the [Pygame](https://www.pygame.org) library.
 
@@ -30,3 +30,5 @@ The game requires assets folder to display window.
 - The player makes their move simply by clicking on the empty field they want to put their pawn on.
 - After a finished game, player can either play a rematch or start a new game using different settings.
 
+# Details
+For more details check docs folder.
