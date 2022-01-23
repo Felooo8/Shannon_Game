@@ -1,6 +1,6 @@
 # Shannon Game
 
-A [Shannon Game Gale](https://en.wikipedia.org/wiki/Shannon_switching_game) variant written in Python using the [Pygame](https://www.pygame.org) library.
+A [Shannon Game Gale](https://en.wikipedia.org/wiki/Shannon_switching_game#Gale) variant written in Python using the [Pygame](https://www.pygame.org) library.
 
 # Required packages
 - 'pygame'
