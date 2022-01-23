@@ -182,6 +182,5 @@ def test_hard_play_7x7():
         [h, b, b, b, b, b, b],
         [g, z, a, a, a, a, a]
     ]
-
     ai.play(board)
     assert g.value == 1

@@ -9,7 +9,7 @@ class Computer:
     Represents an AI.`
     It makes random moves.\n
     Contains attributes:\n
-        :param name: AI's name\n
+    :param name: AI's name\n
     """
 
     def __init__(self):
