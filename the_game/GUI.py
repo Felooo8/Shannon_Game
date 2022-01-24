@@ -1,5 +1,13 @@
+"""
+This file handles GUI (everything visual).
+Sets images, texts, fonts, window size etc.
+Handles events.
+"""
+
 import pygame
 import os
+import sys
+
 
 pygame.init()
 pygame.font.init()
@@ -7,26 +15,28 @@ pygame.display.list_modes()
 
 clock = pygame.time.Clock()
 
+# VARIABLES
+
+FPS = 20
+
 WINDOW_SIZE = 450
 
-BG_IMAGE_5 = pygame.image.load(
-    os.path.join('assets/board_5.png'))
-
-BG_IMAGE_7 = pygame.image.load(
-    os.path.join('assets/board_7.png'))
-
-BG_IMAGE_9 = pygame.image.load(
-    os.path.join('assets/board_9.png'))
+# BACKGROUND
+BG_IMAGE_5 = pygame.image.load(os.path.join('assets/board_5.png'))
+BG_IMAGE_7 = pygame.image.load(os.path.join('assets/board_7.png'))
+BG_IMAGE_9 = pygame.image.load(os.path.join('assets/board_9.png'))
 
 BG = pygame.transform.scale(BG_IMAGE_5, (WINDOW_SIZE, WINDOW_SIZE))
-
-BG_BLUR_IMAGE = pygame.image.load(
-    os.path.join('assets/board_blur.png'))
-
+BG_BLUR_IMAGE = pygame.image.load(os.path.join('assets/board_blur.png'))
 BG_BLUR = pygame.transform.scale(BG_BLUR_IMAGE, (WINDOW_SIZE, WINDOW_SIZE))
 
+# IMAGES SIZES
+radius = WINDOW_SIZE / 5
 
-WIDTH, HEIGHT = BG.get_width(), BG.get_height()
+images_smaller_than_place = 6
+image_radius = radius - images_smaller_than_place
+
+WIDTH, HEIGHT = WINDOW_SIZE, WINDOW_SIZE
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Shannon Game by Felo")
@@ -34,22 +44,6 @@ icon_size = (64, 64)
 programIcon = pygame.transform.scale(
     pygame.image.load(os.path.join('assets/icon.png')), icon_size)
 pygame.display.set_icon(programIcon)
-
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-YELLOW = (255, 255, 0)
-BLUE = (0, 0, 255)
-GREY = (220, 220, 220)
-
-FPS = 20
-
-DELAY = 700  # ms
-
-radius = BG.get_width() / 5
-
-images_smaller_than_place = 6
-image_radius = radius - images_smaller_than_place
 
 PLAY_IMAGE = pygame.image.load(
     os.path.join('assets/play.png'))
@@ -80,20 +74,27 @@ BLANK_CIRCLE_IMAGE = pygame.image.load(
 BLANK_CIRCLE = pygame.transform.scale(
     BLANK_CIRCLE_IMAGE, (image_radius, image_radius))
 
+# FONTS
 font_path = 'assets/COMIC.TTF'
 
 FONT = pygame.font.Font(font_path, 40)
 FONT_SMALL = pygame.font.Font(font_path, 30)
 FONT_BIG = pygame.font.Font(font_path, 80)
 
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+BLUE = (0, 0, 255)
+GREY = (220, 220, 220)
+
 
 class Window:
     """
     Class Window.
     Manages GUI of the game.
-    Contains attributes:
-    :param BG: represents background image of the window
-    :type BG: pygame.image
+    Contains attributes:\n
+        :param BG: represents background image of the window\n
     """
 
     def __init__(self) -> None:
@@ -101,13 +102,14 @@ class Window:
 
     def handle_events(self, board, human_move_now):
         """
-        Handles users interactions with the game, such as:
-        - quiting the game
-        - making a move (mouse click on the free pawn)
+        Handles users interactions with the game, such as:\n
+            :quiting the game\n
+            :making a move (mouse click on the free pawn)
         """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return "exit"
+                pygame.quit()
+                sys.exit()
 
             # checks if player clicked a mouse
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -121,12 +123,6 @@ class Window:
                             if rectangle.collidepoint(pos):
                                 if pawn.value == '':
                                     return pawn
-
-    def wait(self):
-        """
-        Delay for AI's move, so that it looks as if it was thinking
-        """
-        pygame.time.delay(DELAY)
 
     def draw_main_window(self, board, human_player_value, pc_player_value):
         clock.tick(FPS)
@@ -230,7 +226,8 @@ class Window:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                exit()
+                pygame.quit()
+                sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
@@ -320,7 +317,7 @@ class Window:
 
     def set_bg(self, board_size):
         """
-        Sets background image and pawn's omage sizes based on the BG.
+        Sets background image and pawn's images sizes based on the BG.
         """
         if board_size == 7:
             self._BG = pygame.transform.scale(
@@ -354,7 +351,7 @@ class Window:
 
     def pawn_image_size(self, board_size):
         """
-        Sets a pawn image size based on the board size
+        Sets a pawn image size based on the board size.
         """
         radius = self._bg_width() / board_size
         size = radius - images_smaller_than_place

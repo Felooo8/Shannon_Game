@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>Shannon_Game.the_game.board API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Board and Pawn classes.
+Empty board is created there." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,11 +23,19 @@
 <h1 class="title">Module <code>Shannon_Game.the_game.board</code></h1>
 </header>
 <section id="section-intro">
+<p>Board and Pawn classes.
+Empty board is created there.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Board:
+<pre><code class="python">&#34;&#34;&#34;
+Board and Pawn classes.
+Empty board is created there.
+&#34;&#34;&#34;
+
+
+class Board:
     &#34;&#34;&#34;
     Class Board.
     Represents the whole board, which contains of pawns.
@@ -35,8 +44,8 @@
     def __init__(self, size=5) -&gt; None:
         &#34;&#34;&#34;
         Initializes board.
-        Contains attributes:
-            :param size: represents board&#39;s size
+        Contains attributes:\n
+            :param size: represents board&#39;s size\n
             :param board: represents array of pawns
         &#34;&#34;&#34;
         self._size = size
@@ -44,7 +53,7 @@
 
     def create_board(self, size):
         &#34;&#34;&#34;
-            Creates an array based on the size variable -&gt; sets pawns values
+        Creates an array based on the size variable -&gt; sets pawns values
         &#34;&#34;&#34;
         board = []
         for row in range(size):
@@ -69,16 +78,16 @@
 
 class Pawn:
     &#34;&#34;&#34;
-    Class Pawn.
+    Class Pawn.\n
     Represents a single pawn on a board.
     &#34;&#34;&#34;
 
     def __init__(self, value) -&gt; None:
         &#34;&#34;&#34;
         Initializes pawn.
-        Contains attributes:
-            : param value: pawn&#39;s value
-            : param _rectangle: pawn&#39;s rectangle, as an image
+        Contains attributes:\n
+            :param value: pawn&#39;s value\n
+            :param _rectangle: pawn&#39;s rectangle, as an image
         &#34;&#34;&#34;
         self.value = value
         self._rectangle = None
@@ -110,9 +119,11 @@ class Pawn:
 <div class="desc"><p>Class Board.
 Represents the whole board, which contains of pawns.</p>
 <p>Initializes board.
-Contains attributes:
-:param size: represents board's size
-:param board: represents array of pawns</p></div>
+Contains attributes:</p>
+<pre><code>:param size: represents board's size
+
+:param board: represents array of pawns
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -126,8 +137,8 @@ Contains attributes:
     def __init__(self, size=5) -&gt; None:
         &#34;&#34;&#34;
         Initializes board.
-        Contains attributes:
-            :param size: represents board&#39;s size
+        Contains attributes:\n
+            :param size: represents board&#39;s size\n
             :param board: represents array of pawns
         &#34;&#34;&#34;
         self._size = size
@@ -135,7 +146,7 @@ Contains attributes:
 
     def create_board(self, size):
         &#34;&#34;&#34;
-            Creates an array based on the size variable -&gt; sets pawns values
+        Creates an array based on the size variable -&gt; sets pawns values
         &#34;&#34;&#34;
         board = []
         for row in range(size):
@@ -170,7 +181,7 @@ Contains attributes:
 </summary>
 <pre><code class="python">def create_board(self, size):
     &#34;&#34;&#34;
-        Creates an array based on the size variable -&gt; sets pawns values
+    Creates an array based on the size variable -&gt; sets pawns values
     &#34;&#34;&#34;
     board = []
     for row in range(size):
@@ -210,28 +221,30 @@ Contains attributes:
 <span>(</span><span>value)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Class Pawn.
-Represents a single pawn on a board.</p>
+<div class="desc"><p>Class Pawn.</p>
+<p>Represents a single pawn on a board.</p>
 <p>Initializes pawn.
-Contains attributes:
-: param value: pawn's value
-: param _rectangle: pawn's rectangle, as an image</p></div>
+Contains attributes:</p>
+<pre><code>:param value: pawn's value
+
+:param _rectangle: pawn's rectangle, as an image
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Pawn:
     &#34;&#34;&#34;
-    Class Pawn.
+    Class Pawn.\n
     Represents a single pawn on a board.
     &#34;&#34;&#34;
 
     def __init__(self, value) -&gt; None:
         &#34;&#34;&#34;
         Initializes pawn.
-        Contains attributes:
-            : param value: pawn&#39;s value
-            : param _rectangle: pawn&#39;s rectangle, as an image
+        Contains attributes:\n
+            :param value: pawn&#39;s value\n
+            :param _rectangle: pawn&#39;s rectangle, as an image
         &#34;&#34;&#34;
         self.value = value
         self._rectangle = None

@@ -1,8 +1,8 @@
 from the_game.board import Pawn
 from the_game.algorythms import (
-    if_wins, best_moves, _roads_to_winning,
+    if_won, best_moves, _roads_to_winning,
     _location_after_move, _if_reached_edge,
-    _filter_blank, _check_if_wins, _best_roads
+    _filter_blank, _check_if_won, _best_roads
 )
 
 pawn_human = Pawn(0)
@@ -10,7 +10,7 @@ pawn____ai = Pawn(1)
 pawn_blank = Pawn('')
 
 
-def test_fitler_and_if_wins():
+def test_fitler_and_if_won():
     pawn_b = Pawn('')
     pawn_a = Pawn(0)
     x = [[pawn_b, pawn_b], [pawn_b, pawn_a],
@@ -38,13 +38,13 @@ def test_fitler2():
     assert filtr2 == [[pawn_b, pawn_b], [pawn_b], [pawn_b]]
 
 
-def test_check_if_wins():
+def test_check_if_won():
     a = Pawn('')
     b = Pawn(0)
     x = [[], [a, b]]
     y = [[a], [a, b]]
-    assert _check_if_wins(y) is False
-    assert _check_if_wins(x) is True
+    assert _check_if_won(y) is False
+    assert _check_if_won(x) is True
 
 
 def test_best_road():
@@ -111,7 +111,7 @@ def test_roads_to_winning():
                  [pawn_human, pawn_blank, pawn_human]]
 
 
-def test_if_wins():
+def test_if_won():
     array = [
         [pawn_human, pawn_blank, pawn_blank, pawn_blank, pawn_blank],
         [pawn_human, pawn_blank, pawn_human, pawn_human, pawn_human],
@@ -119,8 +119,8 @@ def test_if_wins():
         [pawn_human, pawn_blank, pawn_human, pawn____ai, pawn____ai],
         [pawn____ai, pawn____ai, pawn____ai, pawn____ai, pawn_blank],
     ]
-    x = if_wins(array, 1)
-    y = if_wins(array, 0)
+    x = if_won(array, 1)
+    y = if_won(array, 0)
     assert x is True
     assert y is False
 

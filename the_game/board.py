@@ -1,3 +1,9 @@
+"""
+Board and Pawn classes.
+Empty board is created there.
+"""
+
+
 class Board:
     """
     Class Board.
@@ -7,8 +13,8 @@ class Board:
     def __init__(self, size=5) -> None:
         """
         Initializes board.
-        Contains attributes:
-            :param size: represents board's size
+        Contains attributes:\n
+            :param size: represents board's size\n
             :param board: represents array of pawns
         """
         self._size = size
@@ -16,7 +22,7 @@ class Board:
 
     def create_board(self, size):
         """
-            Creates an array based on the size variable -> sets pawns values
+        Creates an array based on the size variable -> sets pawns values
         """
         board = []
         for row in range(size):
@@ -41,16 +47,16 @@ class Board:
 
 class Pawn:
     """
-    Class Pawn.
+    Class Pawn.\n
     Represents a single pawn on a board.
     """
 
     def __init__(self, value) -> None:
         """
         Initializes pawn.
-        Contains attributes:
-            : param value: pawn's value
-            : param _rectangle: pawn's rectangle, as an image
+        Contains attributes:\n
+            :param value: pawn's value\n
+            :param _rectangle: pawn's rectangle, as an image
         """
         self.value = value
         self._rectangle = None

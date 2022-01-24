@@ -28,9 +28,9 @@
 </summary>
 <pre><code class="python">from the_game.board import Pawn
 from the_game.algorythms import (
-    if_wins, best_moves, _roads_to_winning,
+    if_won, best_moves, _roads_to_winning,
     _location_after_move, _if_reached_edge,
-    _filter_blank, _check_if_wins, _best_roads
+    _filter_blank, _check_if_won, _best_roads
 )
 
 pawn_human = Pawn(0)
@@ -38,7 +38,7 @@ pawn____ai = Pawn(1)
 pawn_blank = Pawn(&#39;&#39;)
 
 
-def test_fitler_and_if_wins():
+def test_fitler_and_if_won():
     pawn_b = Pawn(&#39;&#39;)
     pawn_a = Pawn(0)
     x = [[pawn_b, pawn_b], [pawn_b, pawn_a],
@@ -66,13 +66,13 @@ def test_fitler2():
     assert filtr2 == [[pawn_b, pawn_b], [pawn_b], [pawn_b]]
 
 
-def test_check_if_wins():
+def test_check_if_won():
     a = Pawn(&#39;&#39;)
     b = Pawn(0)
     x = [[], [a, b]]
     y = [[a], [a, b]]
-    assert _check_if_wins(y) is False
-    assert _check_if_wins(x) is True
+    assert _check_if_won(y) is False
+    assert _check_if_won(x) is True
 
 
 def test_best_road():
@@ -139,7 +139,7 @@ def test_roads_to_winning():
                  [pawn_human, pawn_blank, pawn_human]]
 
 
-def test_if_wins():
+def test_if_won():
     array = [
         [pawn_human, pawn_blank, pawn_blank, pawn_blank, pawn_blank],
         [pawn_human, pawn_blank, pawn_human, pawn_human, pawn_human],
@@ -147,8 +147,8 @@ def test_if_wins():
         [pawn_human, pawn_blank, pawn_human, pawn____ai, pawn____ai],
         [pawn____ai, pawn____ai, pawn____ai, pawn____ai, pawn_blank],
     ]
-    x = if_wins(array, 1)
-    y = if_wins(array, 0)
+    x = if_won(array, 1)
+    y = if_won(array, 0)
     assert x is True
     assert y is False
 
@@ -414,8 +414,8 @@ def test_best_moves_5():
     assert _best_roads(y) == [[a], [a, b], [a, b, a]]</code></pre>
 </details>
 </dd>
-<dt id="Shannon_Game.tests.test_algorythms.test_check_if_wins"><code class="name flex">
-<span>def <span class="ident">test_check_if_wins</span></span>(<span>)</span>
+<dt id="Shannon_Game.tests.test_algorythms.test_check_if_won"><code class="name flex">
+<span>def <span class="ident">test_check_if_won</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -423,13 +423,13 @@ def test_best_moves_5():
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def test_check_if_wins():
+<pre><code class="python">def test_check_if_won():
     a = Pawn(&#39;&#39;)
     b = Pawn(0)
     x = [[], [a, b]]
     y = [[a], [a, b]]
-    assert _check_if_wins(y) is False
-    assert _check_if_wins(x) is True</code></pre>
+    assert _check_if_won(y) is False
+    assert _check_if_won(x) is True</code></pre>
 </details>
 </dd>
 <dt id="Shannon_Game.tests.test_algorythms.test_fitler2"><code class="name flex">
@@ -455,8 +455,8 @@ def test_best_moves_5():
     assert filtr2 == [[pawn_b, pawn_b], [pawn_b], [pawn_b]]</code></pre>
 </details>
 </dd>
-<dt id="Shannon_Game.tests.test_algorythms.test_fitler_and_if_wins"><code class="name flex">
-<span>def <span class="ident">test_fitler_and_if_wins</span></span>(<span>)</span>
+<dt id="Shannon_Game.tests.test_algorythms.test_fitler_and_if_won"><code class="name flex">
+<span>def <span class="ident">test_fitler_and_if_won</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -464,7 +464,7 @@ def test_best_moves_5():
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def test_fitler_and_if_wins():
+<pre><code class="python">def test_fitler_and_if_won():
     pawn_b = Pawn(&#39;&#39;)
     pawn_a = Pawn(0)
     x = [[pawn_b, pawn_b], [pawn_b, pawn_a],
@@ -507,8 +507,8 @@ def test_best_moves_5():
     assert _if_reached_edge(array, location_ai_bad, 1) is False</code></pre>
 </details>
 </dd>
-<dt id="Shannon_Game.tests.test_algorythms.test_if_wins"><code class="name flex">
-<span>def <span class="ident">test_if_wins</span></span>(<span>)</span>
+<dt id="Shannon_Game.tests.test_algorythms.test_if_won"><code class="name flex">
+<span>def <span class="ident">test_if_won</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -516,7 +516,7 @@ def test_best_moves_5():
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def test_if_wins():
+<pre><code class="python">def test_if_won():
     array = [
         [pawn_human, pawn_blank, pawn_blank, pawn_blank, pawn_blank],
         [pawn_human, pawn_blank, pawn_human, pawn_human, pawn_human],
@@ -524,8 +524,8 @@ def test_best_moves_5():
         [pawn_human, pawn_blank, pawn_human, pawn____ai, pawn____ai],
         [pawn____ai, pawn____ai, pawn____ai, pawn____ai, pawn_blank],
     ]
-    x = if_wins(array, 1)
-    y = if_wins(array, 0)
+    x = if_won(array, 1)
+    y = if_won(array, 0)
     assert x is True
     assert y is False</code></pre>
 </details>
@@ -607,11 +607,11 @@ def test_best_moves_5():
 <li><code><a title="Shannon_Game.tests.test_algorythms.test_best_moves_4" href="#Shannon_Game.tests.test_algorythms.test_best_moves_4">test_best_moves_4</a></code></li>
 <li><code><a title="Shannon_Game.tests.test_algorythms.test_best_moves_5" href="#Shannon_Game.tests.test_algorythms.test_best_moves_5">test_best_moves_5</a></code></li>
 <li><code><a title="Shannon_Game.tests.test_algorythms.test_best_road" href="#Shannon_Game.tests.test_algorythms.test_best_road">test_best_road</a></code></li>
-<li><code><a title="Shannon_Game.tests.test_algorythms.test_check_if_wins" href="#Shannon_Game.tests.test_algorythms.test_check_if_wins">test_check_if_wins</a></code></li>
+<li><code><a title="Shannon_Game.tests.test_algorythms.test_check_if_won" href="#Shannon_Game.tests.test_algorythms.test_check_if_won">test_check_if_won</a></code></li>
 <li><code><a title="Shannon_Game.tests.test_algorythms.test_fitler2" href="#Shannon_Game.tests.test_algorythms.test_fitler2">test_fitler2</a></code></li>
-<li><code><a title="Shannon_Game.tests.test_algorythms.test_fitler_and_if_wins" href="#Shannon_Game.tests.test_algorythms.test_fitler_and_if_wins">test_fitler_and_if_wins</a></code></li>
+<li><code><a title="Shannon_Game.tests.test_algorythms.test_fitler_and_if_won" href="#Shannon_Game.tests.test_algorythms.test_fitler_and_if_won">test_fitler_and_if_won</a></code></li>
 <li><code><a title="Shannon_Game.tests.test_algorythms.test_if_reached_edge" href="#Shannon_Game.tests.test_algorythms.test_if_reached_edge">test_if_reached_edge</a></code></li>
-<li><code><a title="Shannon_Game.tests.test_algorythms.test_if_wins" href="#Shannon_Game.tests.test_algorythms.test_if_wins">test_if_wins</a></code></li>
+<li><code><a title="Shannon_Game.tests.test_algorythms.test_if_won" href="#Shannon_Game.tests.test_algorythms.test_if_won">test_if_won</a></code></li>
 <li><code><a title="Shannon_Game.tests.test_algorythms.test_location_after_move" href="#Shannon_Game.tests.test_algorythms.test_location_after_move">test_location_after_move</a></code></li>
 <li><code><a title="Shannon_Game.tests.test_algorythms.test_roads_to_winning" href="#Shannon_Game.tests.test_algorythms.test_roads_to_winning">test_roads_to_winning</a></code></li>
 </ul>

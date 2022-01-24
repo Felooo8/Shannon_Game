@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>Shannon_Game.the_game.GUI API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="This file handles GUI (everything visual).
+Sets images, texts, fonts, window size etc.
+Handles events." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,12 +24,23 @@
 <h1 class="title">Module <code>Shannon_Game.the_game.GUI</code></h1>
 </header>
 <section id="section-intro">
+<p>This file handles GUI (everything visual).
+Sets images, texts, fonts, window size etc.
+Handles events.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import pygame
+<pre><code class="python">&#34;&#34;&#34;
+This file handles GUI (everything visual).
+Sets images, texts, fonts, window size etc.
+Handles events.
+&#34;&#34;&#34;
+
+import pygame
 import os
+import sys
+
 
 pygame.init()
 pygame.font.init()
@@ -35,26 +48,28 @@ pygame.display.list_modes()
 
 clock = pygame.time.Clock()
 
+# VARIABLES
+
+FPS = 20
+
 WINDOW_SIZE = 450
 
-BG_IMAGE_5 = pygame.image.load(
-    os.path.join(&#39;assets/board_5.png&#39;))
-
-BG_IMAGE_7 = pygame.image.load(
-    os.path.join(&#39;assets/board_7.png&#39;))
-
-BG_IMAGE_9 = pygame.image.load(
-    os.path.join(&#39;assets/board_9.png&#39;))
+# BACKGROUND
+BG_IMAGE_5 = pygame.image.load(os.path.join(&#39;assets/board_5.png&#39;))
+BG_IMAGE_7 = pygame.image.load(os.path.join(&#39;assets/board_7.png&#39;))
+BG_IMAGE_9 = pygame.image.load(os.path.join(&#39;assets/board_9.png&#39;))
 
 BG = pygame.transform.scale(BG_IMAGE_5, (WINDOW_SIZE, WINDOW_SIZE))
-
-BG_BLUR_IMAGE = pygame.image.load(
-    os.path.join(&#39;assets/board_blur.png&#39;))
-
+BG_BLUR_IMAGE = pygame.image.load(os.path.join(&#39;assets/board_blur.png&#39;))
 BG_BLUR = pygame.transform.scale(BG_BLUR_IMAGE, (WINDOW_SIZE, WINDOW_SIZE))
 
+# IMAGES SIZES
+radius = WINDOW_SIZE / 5
 
-WIDTH, HEIGHT = BG.get_width(), BG.get_height()
+images_smaller_than_place = 6
+image_radius = radius - images_smaller_than_place
+
+WIDTH, HEIGHT = WINDOW_SIZE, WINDOW_SIZE
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(&#34;Shannon Game by Felo&#34;)
@@ -62,22 +77,6 @@ icon_size = (64, 64)
 programIcon = pygame.transform.scale(
     pygame.image.load(os.path.join(&#39;assets/icon.png&#39;)), icon_size)
 pygame.display.set_icon(programIcon)
-
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-YELLOW = (255, 255, 0)
-BLUE = (0, 0, 255)
-GREY = (220, 220, 220)
-
-FPS = 20
-
-DELAY = 700  # ms
-
-radius = BG.get_width() / 5
-
-images_smaller_than_place = 6
-image_radius = radius - images_smaller_than_place
 
 PLAY_IMAGE = pygame.image.load(
     os.path.join(&#39;assets/play.png&#39;))
@@ -108,20 +107,27 @@ BLANK_CIRCLE_IMAGE = pygame.image.load(
 BLANK_CIRCLE = pygame.transform.scale(
     BLANK_CIRCLE_IMAGE, (image_radius, image_radius))
 
+# FONTS
 font_path = &#39;assets/COMIC.TTF&#39;
 
 FONT = pygame.font.Font(font_path, 40)
 FONT_SMALL = pygame.font.Font(font_path, 30)
 FONT_BIG = pygame.font.Font(font_path, 80)
 
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+BLUE = (0, 0, 255)
+GREY = (220, 220, 220)
+
 
 class Window:
     &#34;&#34;&#34;
     Class Window.
     Manages GUI of the game.
-    Contains attributes:
-    :param BG: represents background image of the window
-    :type BG: pygame.image
+    Contains attributes:\n
+        :param BG: represents background image of the window\n
     &#34;&#34;&#34;
 
     def __init__(self) -&gt; None:
@@ -129,13 +135,14 @@ class Window:
 
     def handle_events(self, board, human_move_now):
         &#34;&#34;&#34;
-        Handles users interactions with the game, such as:
-        - quiting the game
-        - making a move (mouse click on the free pawn)
+        Handles users interactions with the game, such as:\n
+            :quiting the game\n
+            :making a move (mouse click on the free pawn)
         &#34;&#34;&#34;
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return &#34;exit&#34;
+                pygame.quit()
+                sys.exit()
 
             # checks if player clicked a mouse
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -149,12 +156,6 @@ class Window:
                             if rectangle.collidepoint(pos):
                                 if pawn.value == &#39;&#39;:
                                     return pawn
-
-    def wait(self):
-        &#34;&#34;&#34;
-        Delay for AI&#39;s move, so that it looks as if it was thinking
-        &#34;&#34;&#34;
-        pygame.time.delay(DELAY)
 
     def draw_main_window(self, board, human_player_value, pc_player_value):
         clock.tick(FPS)
@@ -258,7 +259,8 @@ class Window:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                exit()
+                pygame.quit()
+                sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
@@ -348,7 +350,7 @@ class Window:
 
     def set_bg(self, board_size):
         &#34;&#34;&#34;
-        Sets background image and pawn&#39;s omage sizes based on the BG.
+        Sets background image and pawn&#39;s images sizes based on the BG.
         &#34;&#34;&#34;
         if board_size == 7:
             self._BG = pygame.transform.scale(
@@ -382,7 +384,7 @@ class Window:
 
     def pawn_image_size(self, board_size):
         &#34;&#34;&#34;
-        Sets a pawn image size based on the board size
+        Sets a pawn image size based on the board size.
         &#34;&#34;&#34;
         radius = self._bg_width() / board_size
         size = radius - images_smaller_than_place
@@ -405,9 +407,9 @@ class Window:
 <dd>
 <div class="desc"><p>Class Window.
 Manages GUI of the game.
-Contains attributes:
-:param BG: represents background image of the window
-:type BG: pygame.image</p></div>
+Contains attributes:</p>
+<pre><code>:param BG: represents background image of the window
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -416,9 +418,8 @@ Contains attributes:
     &#34;&#34;&#34;
     Class Window.
     Manages GUI of the game.
-    Contains attributes:
-    :param BG: represents background image of the window
-    :type BG: pygame.image
+    Contains attributes:\n
+        :param BG: represents background image of the window\n
     &#34;&#34;&#34;
 
     def __init__(self) -&gt; None:
@@ -426,13 +427,14 @@ Contains attributes:
 
     def handle_events(self, board, human_move_now):
         &#34;&#34;&#34;
-        Handles users interactions with the game, such as:
-        - quiting the game
-        - making a move (mouse click on the free pawn)
+        Handles users interactions with the game, such as:\n
+            :quiting the game\n
+            :making a move (mouse click on the free pawn)
         &#34;&#34;&#34;
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return &#34;exit&#34;
+                pygame.quit()
+                sys.exit()
 
             # checks if player clicked a mouse
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -446,12 +448,6 @@ Contains attributes:
                             if rectangle.collidepoint(pos):
                                 if pawn.value == &#39;&#39;:
                                     return pawn
-
-    def wait(self):
-        &#34;&#34;&#34;
-        Delay for AI&#39;s move, so that it looks as if it was thinking
-        &#34;&#34;&#34;
-        pygame.time.delay(DELAY)
 
     def draw_main_window(self, board, human_player_value, pc_player_value):
         clock.tick(FPS)
@@ -555,7 +551,8 @@ Contains attributes:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                exit()
+                pygame.quit()
+                sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
@@ -645,7 +642,7 @@ Contains attributes:
 
     def set_bg(self, board_size):
         &#34;&#34;&#34;
-        Sets background image and pawn&#39;s omage sizes based on the BG.
+        Sets background image and pawn&#39;s images sizes based on the BG.
         &#34;&#34;&#34;
         if board_size == 7:
             self._BG = pygame.transform.scale(
@@ -679,7 +676,7 @@ Contains attributes:
 
     def pawn_image_size(self, board_size):
         &#34;&#34;&#34;
-        Sets a pawn image size based on the board size
+        Sets a pawn image size based on the board size.
         &#34;&#34;&#34;
         radius = self._bg_width() / board_size
         size = radius - images_smaller_than_place
@@ -870,7 +867,8 @@ Contains attributes:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            exit()
+            pygame.quit()
+            sys.exit()
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
@@ -912,22 +910,25 @@ Contains attributes:
 <span>def <span class="ident">handle_events</span></span>(<span>self, board, human_move_now)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Handles users interactions with the game, such as:
-- quiting the game
-- making a move (mouse click on the free pawn)</p></div>
+<div class="desc"><p>Handles users interactions with the game, such as:</p>
+<pre><code>:quiting the game
+
+:making a move (mouse click on the free pawn)
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def handle_events(self, board, human_move_now):
     &#34;&#34;&#34;
-    Handles users interactions with the game, such as:
-    - quiting the game
-    - making a move (mouse click on the free pawn)
+    Handles users interactions with the game, such as:\n
+        :quiting the game\n
+        :making a move (mouse click on the free pawn)
     &#34;&#34;&#34;
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            return &#34;exit&#34;
+            pygame.quit()
+            sys.exit()
 
         # checks if player clicked a mouse
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -970,14 +971,14 @@ Contains attributes:
 <span>def <span class="ident">pawn_image_size</span></span>(<span>self, board_size)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets a pawn image size based on the board size</p></div>
+<div class="desc"><p>Sets a pawn image size based on the board size.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def pawn_image_size(self, board_size):
     &#34;&#34;&#34;
-    Sets a pawn image size based on the board size
+    Sets a pawn image size based on the board size.
     &#34;&#34;&#34;
     radius = self._bg_width() / board_size
     size = radius - images_smaller_than_place
@@ -989,14 +990,14 @@ Contains attributes:
 <span>def <span class="ident">set_bg</span></span>(<span>self, board_size)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sets background image and pawn's omage sizes based on the BG.</p></div>
+<div class="desc"><p>Sets background image and pawn's images sizes based on the BG.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def set_bg(self, board_size):
     &#34;&#34;&#34;
-    Sets background image and pawn&#39;s omage sizes based on the BG.
+    Sets background image and pawn&#39;s images sizes based on the BG.
     &#34;&#34;&#34;
     if board_size == 7:
         self._BG = pygame.transform.scale(
@@ -1008,22 +1009,6 @@ Contains attributes:
         self._BG = pygame.transform.scale(
             BG_IMAGE_5, (WINDOW_SIZE, WINDOW_SIZE))
     self.pawn_image_size(board_size)</code></pre>
-</details>
-</dd>
-<dt id="Shannon_Game.the_game.GUI.Window.wait"><code class="name flex">
-<span>def <span class="ident">wait</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Delay for AI's move, so that it looks as if it was thinking</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def wait(self):
-    &#34;&#34;&#34;
-    Delay for AI&#39;s move, so that it looks as if it was thinking
-    &#34;&#34;&#34;
-    pygame.time.delay(DELAY)</code></pre>
 </details>
 </dd>
 </dl>
@@ -1054,7 +1039,6 @@ Contains attributes:
 <li><code><a title="Shannon_Game.the_game.GUI.Window.pawn_coords" href="#Shannon_Game.the_game.GUI.Window.pawn_coords">pawn_coords</a></code></li>
 <li><code><a title="Shannon_Game.the_game.GUI.Window.pawn_image_size" href="#Shannon_Game.the_game.GUI.Window.pawn_image_size">pawn_image_size</a></code></li>
 <li><code><a title="Shannon_Game.the_game.GUI.Window.set_bg" href="#Shannon_Game.the_game.GUI.Window.set_bg">set_bg</a></code></li>
-<li><code><a title="Shannon_Game.the_game.GUI.Window.wait" href="#Shannon_Game.the_game.GUI.Window.wait">wait</a></code></li>
 </ul>
 </li>
 </ul>

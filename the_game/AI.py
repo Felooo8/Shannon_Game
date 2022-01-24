@@ -1,3 +1,8 @@
+"""
+Bots classes(both easy and hard).
+Responsible for the way Computer chooses their pawns.
+"""
+
 import random
 import names
 from the_game.algorythms import best_moves
@@ -6,10 +11,10 @@ from the_game.algorythms import best_moves
 class Computer:
     """
     Class Computer.
-    Represents an AI.`
+    Represents an easy AI.
     It makes random moves.\n
     Contains attributes:\n
-    :param name: AI's name\n
+        :param name: AI's name
     """
 
     def __init__(self):
@@ -39,7 +44,7 @@ class AIComputer(Computer):
     Class Computer.
     Represents an advanced AI.
     It makes moves based on a simple algorythm.\n
-    Contains attributes:
+    Contains attributes:\n
         :param name: AI's name
     """
 

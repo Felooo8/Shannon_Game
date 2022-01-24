@@ -1,8 +1,13 @@
+"""
+Responsible for game engine.
+Handles logic of the game, controlls turns, calls GUI.
+"""
+
 from the_game.AI import AIComputer, Computer
 from the_game.board import Board
 from the_game.GUI import Window
 from the_game.player import Player
-from the_game.algorythms import if_wins
+from the_game.algorythms import if_won
 
 
 class Game:
@@ -17,11 +22,11 @@ class Game:
     def __init__(self, player=None, board_size=5, AI=None):
         """
         Initializes game.
-        Parameters:
-            :param human_move_now: determines, whose move i snow (if True => human player)
-            :param AI: represents AI
-            :param player: represents human player
-            :param human_player_value: determines, what is the value of human's pawn
+        Parameters:\n
+            :param human_move_now: determines, whose move is now (if True => human player)\n
+            :param AI: represents AI\n
+            :param player: represents human player\n
+            :param human_player_value: determines, what is the value of human's pawn\n
             :param pc_player_value: determines, what is the value of ai's pawn
         """  # noqa
         self.human_move_now = True
@@ -109,7 +114,6 @@ class Game:
             else:
                 # now is AI's move -> makes a move
                 self.AI.play(self.board)
-                self.window.wait()  # delay
                 self.change_current_player()
 
     def draw_window(self):
@@ -126,21 +130,21 @@ class Game:
         """
         Checks if someone has won, after his move, then changes current mover
         """
-        self.check_if_someone_wins()
+        self.check_if_someone_won()
         self.human_move_now = not self.human_move_now
 
-    def check_if_someone_wins(self):
+    def check_if_someone_won(self):
         """
         Checks if someone has won after the last move
         """
         # gets value which has just changed
         value = (self._human_player_value if self.human_move_now
                  else self._pc_player_value)
-        x = if_wins(self.board.array, value)
+        x = if_won(self.board.array, value)
         if x:
-            self.if_someone_wins()
+            self.if_someone_won()
 
-    def if_someone_wins(self):
+    def if_someone_won(self):
         """
         Handles action after someone has won
         """

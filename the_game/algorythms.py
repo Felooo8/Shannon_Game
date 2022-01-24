@@ -1,10 +1,17 @@
-def if_wins(array, _value_to_check):
+"""
+Handles algorythms.
+Checks if someone won.
+Returns list of all the winning roads. (used in AI)
+"""
+
+
+def if_won(array, _value_to_check):
     '''
     Returns bool if someone has won.
     '''
     roads = _roads_to_winning(array, _value_to_check)
     filtered_roads = _filter_blank(roads)
-    has_won = _check_if_wins(filtered_roads)
+    has_won = _check_if_won(filtered_roads)
     if has_won:
         return True
     return False
@@ -193,7 +200,7 @@ def _filter_blank(roads):
     return filtered_roads
 
 
-def _check_if_wins(filtered_roads):
+def _check_if_won(filtered_roads):
     for road in filtered_roads:
         if not road:
             return True

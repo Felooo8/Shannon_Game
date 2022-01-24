@@ -92,16 +92,16 @@ def test_if_sm_wins(monkeypatch):
     def returnTrue(a):
         game.player = True
 
-    monkeypatch.setattr("the_game.game.Game.if_someone_wins", returnTrue)
+    monkeypatch.setattr("the_game.game.Game.if_someone_won", returnTrue)
     game = Game()
     pawn_human = Pawn(0)
     game.board.array = [[pawn_human, pawn_human, pawn_human],
                         [pawn_human, pawn_human, pawn_human],
                         [pawn_human, pawn_human, pawn_human],
                         ]
-    game.check_if_someone_wins()
+    game.check_if_someone_won()
     assert game.player is True
     game.human_move_now = False
     game.player = False
-    game.check_if_someone_wins()
+    game.check_if_someone_won()
     assert game.player is False
