@@ -6,7 +6,6 @@ Handles events.
 
 import pygame
 import os
-import sys
 
 
 pygame.init()
