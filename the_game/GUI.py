@@ -109,7 +109,6 @@ class Window:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                sys.exit()
 
             # checks if player clicked a mouse
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -227,7 +226,6 @@ class Window:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 

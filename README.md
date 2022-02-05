@@ -19,7 +19,7 @@ Run the following in the terminal to install the Pygame and names library
 # Running the application
 Clone the repository and run the file just as any other Python script (.py) file.
 
-`python3 run.py`
+`python run.py`
 
 **NOTE**
 The game requires assets folder to display window.
