@@ -23,7 +23,7 @@ def test_init(monkeypatch):
     def name():
         return "Test"
 
-    monkeypatch.setattr("names.get_first_name", name)
+    monkeypatch.setattr("the_game.AI._generate_ai_name", name)
     player = Player()
     ai = Computer()
     game = Game(player, 7, ai)
