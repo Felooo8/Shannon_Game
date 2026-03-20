@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shannon-game"
+version = "0.1.0"
+description = "Desktop Shannon switching game implementation built with Python and Pygame."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pygame>=2.5,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0,<9",
+  "names>=0.3.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["the_game*"]
+exclude = ["assets*", "docs*", "tests*"]

@@ -82,6 +82,7 @@ def test_best_road_lenght():
         [pawn____ai, pawn____ai, pawn____ai, pawn____ai, pawn_blank],
     ]
     x = [[pawn_blank], [pawn_blank], [pawn_blank, pawn_blank]]
+    assert ai._best_road_length(x) == 1
     assert ai._best_road_lenght(x) == 1
 
 
